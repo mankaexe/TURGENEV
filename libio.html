@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека-филиал № 3 им. И. С. Тургенева</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333333;
+            --text-light: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'PT Serif', serif;
+            line-height: 1.8;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark);
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5em;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 1.5em;
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary);
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-height: 120px;
+            margin-bottom: 1rem;
+        }
+        
+        /* Навигация */
+        nav {
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            padding: 1rem 0;
+            display: block;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Изображения */
+        .img-left {
+            float: left;
+            margin: 0 2rem 1rem 0;
+            max-width: 45%;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .img-right {
+            float: right;
+            margin: 0 0 1rem 2rem;
+            max-width: 45%;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .gallery img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        /* Часы работы */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .hour-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 4px;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+        
+        .hour-item.closed {
+            background: #fff5f5;
+            border-color: #ffdddd;
+        }
+        
+        .hour-item.sanitary {
+            background: #fff9e6;
+            border-color: #ffeecc;
+        }
+        
+        .day {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .time {
+            color: var(--text-light);
+        }
+        
+        .hour-item.closed .time,
+        .hour-item.sanitary .time {
+            font-weight: 500;
+        }
+        
+        .hour-item.closed .time {
+            color: #e74c3c;
+        }
+        
+        .hour-item.sanitary .time {
+            color: #f39c12;
+        }
+        
+        /* Контакты */
+        .contact-info {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        
+        /* Подвал */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contact-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-list i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .img-left, .img-right {
+                float: none;
+                max-width: 100%;
+                margin: 0 0 1.5rem 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="images/logo.png" alt="Логотип библиотеки" class="logo">
+            <h1>Библиотека-филиал № 3<br>им. И. С. Тургенева</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">О библиотеке</a></li>
+            <li><a href="#history">История</a></li>
+            <li><a href="#activities">Деятельность</a></li>
+            <li><a href="#hours">Часы работы</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="about">
+            <h2>О библиотеке</h2>
+            <img src="images/building.jpg" alt="Здание библиотеки" class="img-left">
+            
+            <p>Библиотека №3 активно работает с образовательными и правоохранительными учреждениями Ворошиловского района. Мы проводим разнообразные мероприятия для всех возрастных групп — от детей до ветеранов, организуем встречи с волгоградскими писателями и поэтами.</p>
+            
+            <p>Особое внимание уделяем популяризации русской классической литературы и русского языка. Наша библиотека служит культурным центром, где каждый может найти что-то интересное для себя.</p>
+            
+            <p>Мы стремимся развивать читательский интерес к произведениям отечественных и зарубежных авторов, знакомим посетителей с лучшими образцами классики и новинками издательского рынка.</p>
+        </section>
+
+        <section id="history">
+            <h2>История библиотеки</h2>
+            <img src="images/history.jpg" alt="Историческое фото библиотеки" class="img-right">
+            
+            <p>Библиотека-филиал № 3 имени Ивана Сергеевича Тургенева была основана 5 марта 1928 года. Это одна из старейших библиотек Волгограда, сохраняющая свои традиции на протяжении десятилетий.</p>
+            
+            <p>Послевоенная история библиотеки началась в 1946 году, когда среди руин разрушенного Сталинграда ей было выделено небольшое помещение площадью всего 56 квадратных метров в сохранившемся финском домике.</p>
+            
+            <p>Несмотря на скромные условия, библиотека уже тогда имела абонемент и передвижной фонд. Книжный фонд насчитывал 43 000 экземпляров, а число читателей достигало 4400 человек.</p>
+        </section>
+
+        <section id="activities">
+            <h2>Наша деятельность</h2>
+            
+            <p>Библиотека активно сотрудничает с администрацией Ворошиловского района, которая неоднократно отмечала высокий уровень нашей работы с молодежью. Наши мероприятия регулярно освещаются в местных СМИ, включая газеты «Казачий круг» и «Городские вести».</p>
+            
+            <div class="gallery">
+                <img src="images/event1.jpg" alt="Литературный вечер">
+                <img src="images/event2.jpg" alt="Встреча с писателем">
+                <img src="images/event3.jpg" alt="Детское мероприятие">
+                <img src="images/event4.jpg" alt="Выставка книг">
+            </div>
+            
+            <h3>Основные направления работы:</h3>
+            <ul>
+                <li>Литературные вечера и творческие встречи</li>
+                <li>Тематические выставки и обзоры литературы</li>
+                <li>Программы для детей и подростков</li>
+                <li>Работа с ветеранами и пожилыми читателями</li>
+                <li>Краеведческая деятельность</li>
+            </ul>
+            
+            <p>На сегодняшний день фонд библиотеки составляет 27 233 печатных издания различной тематики.</p>
+        </section>
+
+        <section id="hours">
+            <h2>Часы работы</h2>
+            <div class="hours-grid">
+                <div class="hour-item">
+                    <span class="day">Вторник</span>
+                    <span class="time">10:00–18:00</span>
+                </div>
+                <div class="hour-item">
+                    <span class="day">Среда</span>
+                    <span class="time">10:00–18:00</span>
+                </div>
+                <div class="hour-item">
+                    <span class="day">Четверг</span>
+                    <span class="time">10:00–18:00</span>
+                </div>
+                <div class="hour-item">
+                    <span class="day">Пятница</span>
+                    <span class="time">10:00–18:00</span>
+                </div>
+                <div class="hour-item">
+                    <span class="day">Суббота</span>
+                    <span class="time">10:00–18:00</span>
+                </div>
+                <div class="hour-item closed">
+                    <span class="day">Воскресенье</span>
+                    <span class="time">Выходной</span>
+                </div>
+                <div class="hour-item closed">
+                    <span class="day">Понедельник</span>
+                    <span class="time">Выходной</span>
+                </div>
+                <div class="hour-item sanitary">
+                    <span class="day">Последний четверг</span>
+                    <span class="time">Санитарный день</span>
+                </div>
+            </div>
+            <p class="note">* Санитарный день проводится в последний четверг каждого месяца. В этот день библиотека закрыта для посещения.</p>
+        </section>
+
+        <section id="contacts">
+            <h2>Контакты</h2>
+            <div class="contact-info">
+                <p><strong>Заведующая библиотекой:</strong> Трушникова Марина Владимировна</p>
+                <p><strong>Адрес:</strong> 400074, г. Волгоград, ул. Ковровская, д. 20 (Ворошиловский район)</p>
+                <p><strong>Телефон:</strong> (8442) 97-41-32</p>
+                <p><strong>Email:</strong> biblio3turgen@example.com</p>
+                
+                <h3>Как добраться</h3>
+                <p>Автобусы: 2, 52Э, 55, 65, 88, 89Э<br>
+                Троллейбусы: 8а, 15А<br>
+                Остановка: «Гостиница Южная» или «Казачий театр»</p>
+            </div>
+        </section>
+    </main>
+
+    </body>
+</html>
